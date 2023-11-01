@@ -1,10 +1,15 @@
 import random
 import time
 from abc import ABC, abstractmethod
+from enum import Enum, unique
+
+
+class Gamestates(Enum):
+    PLAY = 1
+    END = 2
 
 
 class Game:
-    gameStates = {"PLAY": 1, "END": 2}
 
     def __init__(self, gamestate):
         self.gameState = gamestate
@@ -63,9 +68,9 @@ class Game:
     def create_initial_weapons():
         return {1: Weapon("Pistol", 30, 0),
                 2: Weapon("Shotgun", 50, 1),
-                3: Weapon("Smg", 70, 2),
-                4: Weapon("Assault Rifle", 90, 3),
-                5: Weapon("RPG", 100, 4)
+                3: Weapon("Smg", 80, 2),
+                4: Weapon("Assault Rifle", 120, 3),
+                5: Weapon("RPG", 150, 4)
                 }
 
     def game_over(self):
@@ -142,22 +147,21 @@ class Monster(LivingBeing):
 
 
 if __name__ == '__main__':
-
-    game = Game(Game.gameStates["PLAY"])
+    game = Game(Gamestates.PLAY)
 
     weapons = game.create_initial_weapons()
 
     player = game.introduction(weapons)
 
-    while game.gameState != game.gameStates["END"]:
+    while game.gameState != Gamestates.END:
 
         if player.health < 0:
             print(f"{player.name} has died")
-            game.gameState = game.gameStates["END"]
+            game.gameState = Gamestates.END
 
         elif game.floor == 10:
             print("You have reached the end and saved the university :D")
-            game.gameState = game.gameStates["END"]
+            game.gameState = Gamestates.END
 
         else:
             if game.check_to_continue(player) == "Y":
@@ -179,6 +183,6 @@ if __name__ == '__main__':
                         game.floor += 1
 
             else:
-                game.gameState = game.gameStates["END"]
+                game.gameState = Gamestates.END
 
     game.game_over()
