@@ -33,7 +33,6 @@ func introduction() Player {
 /*
 	Function to retrieve user input. Made it into a generic function because user input will be needed in multiple parts of the code
 	@param inputType. This is to tell the user to enter a certain input if they try to enter a blank. E.G name.
-
 */
 func getInput(inputType string) string {
 	reader := bufio.NewReader(os.Stdin)

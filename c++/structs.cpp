@@ -4,8 +4,17 @@
 
 #include <string>
 
-struct Player {
+struct Weapon {
   std::string name;
+  int damage;
+  int delay;
 };
 
-#endif 
+struct Player {
+  std::string name;
+  int health;
+  int attackDelay;
+  Weapon weapon;
+};
+
+#endif
