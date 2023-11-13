@@ -19,15 +19,7 @@ Player introduction() {
   return player;
 };
 
-void createWeapons(std::vector<Weapon> &weapons) {
-  weapons = {{"Pistol", 30, 0},
-             {"Shotgun", 50, 1},
-             {"Sub Machine Gun", 80, 2},
-             {"Assault Rifle", 120, 3},
-             {"Grenade Launcher", 170, 4}};
-}
-
-void displayWeapons(std::vector<Weapon> &weapons) {
+void displayWeapons(Weapon weapons[]) {
   for (int i = 0; i < 5; ++i) {
     std::cout << i << ": Name: " << weapons[i].name
               << " Damage: " << weapons[i].damage
@@ -35,7 +27,7 @@ void displayWeapons(std::vector<Weapon> &weapons) {
   }
 };
 
-void chooseWeapon(std::vector<Weapon> &weapons, Player &player) {
+void chooseWeapon(Weapon weapons[], Player &player) {
   int weaponIndex;
   cin >> weaponIndex;
   if (!cin) {
@@ -44,16 +36,9 @@ void chooseWeapon(std::vector<Weapon> &weapons, Player &player) {
     throw std::invalid_argument("Not a valid option");
   };
 
-  bool weaponChosen;
-
-  for (int i = 0; i < 5; i++) {
-    if ((i == weaponIndex) && (weapons[i].name != "")) {
-      player.weapon = weapons[i];
-      weaponChosen = true;
-      break;
-    }
-  }
-  if (!weaponChosen) {
+  if (weaponIndex >= 0 && weaponIndex < 5) {
+    player.weapon = weapons[weaponIndex];
+  } else {
     throw std::invalid_argument("Not a valid option");
   }
 }
@@ -62,11 +47,11 @@ int main() {
 
   Player player = introduction();
 
-  std::vector<Weapon> weapons = {{"Pistol", 30, 0},
-                                 {"Shotgun", 50, 1},
-                                 {"Sub Machine Gun", 80, 2},
-                                 {"Assault Rifle", 120, 3},
-                                 {"Grenade Launcher", 170, 4}};
+  Weapon weapons[5] = {{"Pistol", 30, 0},
+                       {"Shotgun", 50, 1},
+                       {"Sub Machine Gun", 80, 2},
+                       {"Assault Rifle", 120, 3},
+                       {"Grenade Launcher", 170, 4}};
 
   cout << "Select a weapon" << endl;
   displayWeapons(weapons);
@@ -77,10 +62,9 @@ int main() {
   do {
     try {
       cout << "Please Choose a weapon index";
-      int weaponIndex;
-      cin >> weaponIndex;
       chooseWeapon(weapons, player);
-      std::cout << player.weapon.name;
+      weaponChosen = true;
+      std::cout << player.weapon.name << endl;
     } catch (std::invalid_argument &e) {
       cout << e.what() << endl;
     }
