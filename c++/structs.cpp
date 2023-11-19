@@ -17,4 +17,10 @@ struct Player {
   Weapon weapon;
 };
 
+struct Monster {
+  std::string name;
+  int health;
+  int damage;
+};
+
 #endif
