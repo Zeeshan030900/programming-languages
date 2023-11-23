@@ -31,7 +31,7 @@ class Game:
         while answered is not True:
             try:
                 playerinput = input(
-                    f"You are on floor {self.floor}. You have {p.health}hp.\nDo you want to progress?\nY/N"
+                    f"You are on floor {self.floor}. You have {p.health}hp.\nDo you want to progress?\nY/N\n"
                 )
                 if playerinput.upper() != "Y" and playerinput.upper() != "N":
                     raise NameError
@@ -167,8 +167,7 @@ if __name__ == '__main__':
             if game.check_to_continue(player) == "Y":
 
                 try:
-                    switch_weapon_check = input("Do you want to change weapon? Y/N")
-                    print()
+                    switch_weapon_check = input("Do you want to change weapon? Y/N \n")
                     if switch_weapon_check.upper() != "Y" and switch_weapon_check.upper() != "N":
                         raise NameError
                     elif switch_weapon_check.upper() == "Y":
