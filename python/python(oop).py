@@ -34,9 +34,9 @@ class Game:
                     f"You are on floor {self.floor}. You have {p.health}hp.\nDo you want to progress?\nY/N\n"
                 )
                 if playerinput.upper() != "Y" and playerinput.upper() != "N":
-                    raise NameError
+                    raise ValueError
                 return playerinput.upper()
-            except NameError:
+            except ValueError:
                 print("Not a valid response")
 
     def progress(self, player):
@@ -169,11 +169,11 @@ if __name__ == '__main__':
                 try:
                     switch_weapon_check = input("Do you want to change weapon? Y/N \n")
                     if switch_weapon_check.upper() != "Y" and switch_weapon_check.upper() != "N":
-                        raise NameError
+                        raise ValueError
                     elif switch_weapon_check.upper() == "Y":
                         player.choose_weapon(weapons)
 
-                except NameError:
+                except ValueError:
                     print("Fine. You're sticking with your previous weapon >:(")
 
                 finally:
