@@ -1,4 +1,5 @@
-#include "structs.cpp"
+#include "funcs.h"
+#include "structs.h"
 #include <cctype>
 #include <chrono>
 #include <cstdlib>
@@ -8,64 +9,8 @@
 #include <stdexcept>
 #include <string>
 #include <thread>
-#include <vector>
 
 using namespace std;
-
-Player introduction() {
-  cout << "Welcome to Manchester Metropolitan University. We have been taken "
-          "over by reports sadly. Thanks to the A.I students >:0"
-       << endl;
-  cout << "What is your name?";
-  Player player;
-  cin >> player.name;
-  player.health = 200;
-  return player;
-};
-
-void displayWeapons(Weapon weapons[]) {
-  for (int i = 0; i < 5; ++i) {
-    std::cout << i << ": Name: " + weapons[i].name
-              << " Damage: " << weapons[i].damage
-              << " Attack Delay: " << weapons[i].delay << '\n';
-  }
-};
-
-void chooseWeapon(Weapon weapons[], Player &player) {
-  int weaponIndex;
-  cin >> weaponIndex;
-  if (!cin) {
-    cin.clear();
-    cin.ignore(40, '\n');
-    throw std::invalid_argument("Not a valid option");
-  };
-
-  if (weaponIndex >= 0 && weaponIndex < 5) {
-    player.weapon = weapons[weaponIndex];
-    player.attackDelay = player.weapon.delay;
-  } else {
-    throw std::invalid_argument("Not a valid option");
-  }
-}
-
-void printHealth(string name, int &health) {
-  health = (health < 0) ? 0 : health;
-  cout << name << " is on " << health << "hp" << endl;
-  std::this_thread::sleep_for(std::chrono::seconds(3));
-}
-
-bool switchWeapon() {
-  char input;
-
-  cout << "Do you want to switch weapons?" << endl;
-  cout << "Press Y or y if so" << endl;
-  cin >> input;
-
-  cin.clear();
-  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-  return input == 'Y' || input == 'y';
-}
 
 int main() {
 
@@ -137,7 +82,7 @@ int main() {
         }
 
       } else {
-        cout << "You have decided not to switch weapons.";
+        cout << "You have decided not to switch weapons." << endl;
       }
 
       randomIndex = rand() % 4;
