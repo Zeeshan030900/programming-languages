@@ -56,11 +56,12 @@ class Game:
     #   Returns the player's input.
 
     def check_to_continue(self, p):
+        print(f"You are on floor {self.floor}. You have {p.health}hp.")
         answered = False
         while answered is not True:
             try:
                 playerinput = input(
-                    f"You are on floor {self.floor}. You have {p.health}hp.\nDo you want to progress?\nY/N\n"
+                    "Do you want to progress?\nY/N\n"
                 )
                 if playerinput.upper() != "Y" and playerinput.upper() != "N":
                     raise ValueError
