@@ -90,8 +90,8 @@ func tradeAttacks(player Player, monster Monster) (Player, Monster) {
 		AttackDelay: player.AttackDelay,
 		Weapon:      player.Weapon,
 	}
-	damageText := fmt.Sprintf("%s took %d damage", damagedPlayer.Name, monster.Damage)
-	fmt.Println(damageText)
+	damagePlayerText := fmt.Sprintf("%s took %d damage", damagedPlayer.Name, monster.Damage)
+	fmt.Println(damagePlayerText)
 	time.Sleep(3 * time.Second)
 
 	if damagedPlayer.AttackDelay <= 0 {
@@ -99,8 +99,8 @@ func tradeAttacks(player Player, monster Monster) (Player, Monster) {
 			Health: monster.Health - damagedPlayer.Weapon.Damage,
 			Damage: monster.Damage,
 		}
-		damageText := fmt.Sprintf("%s took %d damage", monster.Name, player.Weapon.Damage)
-		fmt.Println(damageText)
+		damagedMonsterText := fmt.Sprintf("%s took %d damage", monster.Name, player.Weapon.Damage)
+		fmt.Println(damagedMonsterText)
 		time.Sleep(3 * time.Second)
 
 		newPlayer := Player{Name: damagedPlayer.Name,
