@@ -49,7 +49,7 @@ func getInput(inputType string) string {
 func playGame(player Player, monster Monster, floor int) int {
 
 	displayHealth := func(name string, health int) string {
-		if health < 0 {
+		if health <= 0 {
 			return fmt.Sprintf("%s is on 0hp\n%s has died", name, name)
 		} else {
 			return fmt.Sprintf("%s is on %dhp", name, health)
@@ -59,6 +59,11 @@ func playGame(player Player, monster Monster, floor int) int {
 	fmt.Println(displayHealth(player.Name, player.Health))
 	time.Sleep(3 * time.Second)
 	if player.Health <= 0 {
+		return floor
+	}
+
+	if floor == 10 {
+		fmt.Println("Congratulations! You saved the university :D")
 		return floor
 	}
 
