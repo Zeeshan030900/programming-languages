@@ -70,4 +70,23 @@ bool switchWeapon() {
   return input == 'Y' || input == 'y';
 }
 
+void processPlayerTurn(Player &player, Monster &monster) {
+  if (player.attackDelay == 0) {
+    std::cout << player.name + " has done " << player.weapon.damage
+              << " damage to " + monster.name << std::endl;
+    monster.health -= player.weapon.damage;
+    player.attackDelay = player.weapon.delay;
+  } else {
+    std::cout << player.name + " has to wait " << player.attackDelay
+              << " before attacking" << std::endl;
+    player.attackDelay -= 1;
+  }
+}
+
+void processMonsterTurn(Monster &monster, Player player) {
+  std::cout << monster.name + " has done " << monster.damage
+            << " damage to " + player.name << std::endl;
+  player.health -= monster.damage;
+}
+
 #endif
