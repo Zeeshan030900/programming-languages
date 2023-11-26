@@ -25,7 +25,7 @@ func introduction() Player {
 	name := getInput("name")
 	weapon := chooseWeapon(createWeapons)
 
-	return Player{Name: name, Weapon: weapon, Health: 200}
+	return Player{Name: name, Weapon: weapon, Health: 200, AttackDelay: weapon.Delay}
 }
 
 /*
