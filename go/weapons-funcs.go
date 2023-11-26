@@ -28,21 +28,24 @@ func askWeaponSwitch(currentPlayer Player, chooseWeapon func(createWeapons func(
 	return currentPlayer
 }
 func chooseWeapon(createWeapons func() []Weapon) Weapon {
-	weaponsList := createWeapons()
-	fmt.Println("Choose a weapon")
-	for i, weapon := range weaponsList {
-		fmt.Printf("%d: name: %s, damage: %d, delay: %d\n", i, weapon.Name, weapon.Damage, weapon.Delay)
-	}
+	for {
 
-	weaponIndex := getInput("weapon number")
+		weaponsList := createWeapons()
 
-	index, err := strconv.Atoi(weaponIndex)
-	if err != nil || index < 0 || index >= len(weaponsList) {
+		fmt.Println("Choose a weapon")
+		for i, weapon := range weaponsList {
+			fmt.Printf("%d: name: %s, damage: %d, delay: %d\n", i, weapon.Name, weapon.Damage, weapon.Delay)
+		}
+
+		weaponIndex := getInput("weapon number")
+		index, err := strconv.Atoi(weaponIndex)
+		if err == nil && index >= 0 && index < len(weaponsList) {
+			fmt.Println("You have chosen " + weaponsList[index].Name)
+			return weaponsList[index]
+		}
+
 		fmt.Println("Not a valid weapon option. Please try again")
-		return chooseWeapon(createWeapons)
 	}
-
-	return weaponsList[index]
 }
 
 func createWeapons() []Weapon {

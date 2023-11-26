@@ -9,13 +9,11 @@ import (
 )
 
 func main() {
+
 	player := introduction()
 
-	fmt.Printf("Hello %s\n", player.Name)
-
-	finalFloorText := fmt.Sprintf("You reached %d floors", playGame(player, createRandomMonster(), 1))
-
-	fmt.Println(finalFloorText)
+	fmt.Println("Hello " + player.Name)
+	fmt.Println(fmt.Sprintf("You reached %d floors", playGame(player, createRandomMonster(), 1)))
 	fmt.Println("Game Over")
 }
 
@@ -37,7 +35,9 @@ func introduction() Player {
 func getInput(inputType string) string {
 	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Printf("Please enter a %s: ", inputType)
+		consoleText := fmt.Sprintf("Please enter a %s: ", inputType)
+
+		fmt.Println(consoleText)
 		input, _ := reader.ReadString('\n')
 		trimmedInput := strings.TrimSpace(input)
 		if trimmedInput != "" {
