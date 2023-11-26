@@ -21,6 +21,8 @@ class Gamestates(Enum):
 #
 # This is the main class handling the game flow.
 #
+
+
 class Game:
     #    Attributes:
     #     gameState (GameState) : It represents the state of the game- whether it is in progress or has ended.
@@ -53,11 +55,12 @@ class Game:
     #  check_to_continue(self, p: Player) -> str:
     #   Asks for the player's choice to progress the game.
     #   Will continue to ask until the player gives a valid input  
-    #   Returns the player's input.
+    #   If user selects N, game state is changed to END
 
     def check_to_continue(self, p):
         print(f"You are on floor {self.floor}. You have {p.health}hp.")
         answered = False
+
         while answered is not True:
             try:
                 playerinput = input(
@@ -65,7 +68,10 @@ class Game:
                 )
                 if playerinput.upper() != "Y" and playerinput.upper() != "N":
                     raise ValueError
-                return playerinput.upper()
+
+                answered = True
+                if playerinput.upper() == 'N':
+                    self.gameState = Gamestates.END
             except ValueError:
                 print("Not a valid response")
 
@@ -114,6 +120,17 @@ class Game:
                 4: Weapon("Assault Rifle", 120, 3),
                 5: Weapon("RPG", 150, 4)
                 }
+
+    # check_game_state(self, player:Player):
+    # Checks for game end conditions like player's health going below 0 or the player reaching the 10th floor.
+    def check_game_state(self, player):
+        if player.health < 0:
+            print(f"{player.name} has died")
+            self.gameState = Gamestates.END
+
+        elif self.floor == 10:
+            print("You have reached the end and saved the university :D")
+            self.gameState = Gamestates.END
 
     # game_over
     #  Ends the game and displays how many floors the player cleared in the game.
