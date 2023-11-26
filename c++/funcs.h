@@ -83,10 +83,20 @@ void processPlayerTurn(Player &player, Monster &monster) {
   }
 }
 
-void processMonsterTurn(Monster &monster, Player player) {
+void processMonsterTurn(Monster &monster, Player &player) {
   std::cout << monster.name + " has done " << monster.damage
             << " damage to " + player.name << std::endl;
   player.health -= monster.damage;
+}
+
+bool processMonsterDeath(Monster &monster, int &floors) {
+  std::cout << monster.name + " has died" << std::endl;
+
+  floors += 1;
+  std::this_thread::sleep_for(std::chrono::seconds(3));
+
+  std::cout << "Player is on floor " << floors << std::endl;
+  return floors == 10;
 }
 
 #endif

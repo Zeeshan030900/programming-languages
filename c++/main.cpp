@@ -54,13 +54,8 @@ int main() {
 
     printHealth(monster.name, monster.health);
     if (monster.health == 0) {
-      std::cout << monster.name + " has died" << endl;
 
-      floors += 1;
-      std::this_thread::sleep_for(std::chrono::seconds(3));
-
-      std::cout << player.name + " is on floor " << floors << endl;
-      if (floors == 10) {
+      if (processMonsterDeath(monster, floors)) {
         keepPlaying = false;
         break;
       }
@@ -99,7 +94,6 @@ int main() {
 
     processMonsterTurn(monster, player);
     std::this_thread::sleep_for(std::chrono::seconds(3));
-
   } while (keepPlaying);
 
   cout << "Game Over" << endl;
