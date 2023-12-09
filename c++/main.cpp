@@ -22,10 +22,7 @@ int main() {
                        {"Assault Rifle", 120, 3},
                        {"Grenade Launcher", 170, 4}};
 
-  displayWeapons(weapons);
-
   bool weaponChosen = false;
-  std::cout << "Select a weapon:\n";
 
   do {
     try {
@@ -61,9 +58,7 @@ int main() {
       }
 
       if (switchWeapon()) {
-        displayWeapons(weapons);
         try {
-          cout << "Please Choose a weapon number";
 
           chooseWeapon(weapons, player);
 

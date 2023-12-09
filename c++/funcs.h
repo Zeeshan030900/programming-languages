@@ -35,10 +35,13 @@ void displayWeapons(Weapon weapons[]) {
 };
 
 void chooseWeapon(Weapon weapons[], Player &player) {
+
+  displayWeapons(weapons);
   int weaponIndex;
   std::cout << "Please Choose a weapon number";
   std::cin >> weaponIndex;
-  if (!std::cin) {
+
+  if (std::cin.fail()) {
     std::cin.clear();
     std::cin.ignore(40, '\n');
     throw std::invalid_argument("Not a valid option");
