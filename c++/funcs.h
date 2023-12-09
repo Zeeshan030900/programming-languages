@@ -36,6 +36,7 @@ void displayWeapons(Weapon weapons[]) {
 
 void chooseWeapon(Weapon weapons[], Player &player) {
   int weaponIndex;
+  std::cout << "Please Choose a weapon number";
   std::cin >> weaponIndex;
   if (!std::cin) {
     std::cin.clear();

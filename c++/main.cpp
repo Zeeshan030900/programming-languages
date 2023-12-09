@@ -22,7 +22,6 @@ int main() {
                        {"Assault Rifle", 120, 3},
                        {"Grenade Launcher", 170, 4}};
 
-  cout << "Select a weapon number" << endl;
   displayWeapons(weapons);
 
   bool weaponChosen = false;
@@ -30,9 +29,10 @@ int main() {
 
   do {
     try {
-      cout << "Please Choose a weapon number";
+
       chooseWeapon(weapons, player);
       weaponChosen = true;
+
     } catch (std::invalid_argument &e) {
       std::cout << e.what() << endl;
     }
