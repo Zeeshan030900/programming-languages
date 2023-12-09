@@ -90,10 +90,9 @@ int main() {
     }
 
     processPlayerTurn(player, monster);
-    std::this_thread::sleep_for(std::chrono::seconds(3));
 
     processMonsterTurn(monster, player);
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+
   } while (keepPlaying);
 
   cout << "Game Over" << endl;
