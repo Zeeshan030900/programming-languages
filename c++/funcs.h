@@ -26,19 +26,16 @@ Player introduction() {
   return player;
 };
 
-void displayWeapons(Weapon weapons[]) {
+void chooseWeapon(Weapon weapons[], Player &player) {
+
   for (int i = 0; i < 5; ++i) {
     std::cout << i << ": Name: " + weapons[i].name
               << " Damage: " << weapons[i].damage
               << " Attack Delay: " << weapons[i].delay << '\n';
-  }
-};
+  };
 
-void chooseWeapon(Weapon weapons[], Player &player) {
-
-  displayWeapons(weapons);
   int weaponIndex;
-  std::cout << "Please Choose a weapon number";
+  std::cout << "Please choose a weapon number";
   std::cin >> weaponIndex;
 
   if (std::cin.fail()) {
@@ -59,6 +56,28 @@ void printHealth(std::string name, int &health) {
   health = (health < 0) ? 0 : health;
   std::cout << name << " is on " << health << "hp" << std::endl;
   std::this_thread::sleep_for(std::chrono::seconds(3));
+}
+
+bool continuePlaying() {
+  char input;
+
+  while (true) {
+    try {
+      std::cout << "Do you want to keep playing?" << std::endl;
+      std::cout << "Select Y/y or N/n" << std::endl;
+
+      std::cin >> input;
+      if (!(input == 'Y' || input == 'y') && !(input == 'N' || input == 'n')) {
+        std::cin.clear();
+        std::cin.ignore(40, '\n');
+        throw std::invalid_argument("Not a valid option");
+      };
+
+      return input == 'N' || input == 'n';
+    } catch (std::invalid_argument &e) {
+      std::cout << e.what() << std::endl;
+    };
+  }
 }
 
 bool switchWeapon() {
@@ -102,7 +121,11 @@ bool processMonsterDeath(Monster &monster, int &floors) {
   std::this_thread::sleep_for(std::chrono::seconds(3));
 
   std::cout << "Player is on floor " << floors << std::endl;
-  return floors == 10;
+  if (floors == 10) {
+    return false;
+  }
+
+  return continuePlaying();
 }
 
 #endif
